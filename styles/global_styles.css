@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background: #ff9756;
   margin: 0;
-  padding: 0; /* full-width header/footer need 0 padding */
+  padding: 0; /* for full-width navbar/footer */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,10 +16,10 @@ h1, h3, h4 {
   font-weight: 700;
 }
 
-/* --- Navbar (full width, modern) --- */
-.navbar {
+/* --- Navbar --- */
+#navbar {
   width: 100%;
-  background: #54428e;
+  background: #427f8e;
   padding: 18px 40px;
   display: flex;
   justify-content: space-between;
@@ -27,6 +27,15 @@ h1, h3, h4 {
   color: white;
   box-sizing: border-box;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .navbar-links {
@@ -42,15 +51,16 @@ h1, h3, h4 {
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.4px;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 .navbar-links a:hover {
-  opacity: 0.75;
+  opacity: 0.8;
+  transform: translateY(-1px);
 }
 
-/* --- Footer (full width, clean, modern) --- */
-.footer {
+/* --- Footer --- */
+#footer {
   width: 100%;
   background: #1e0a74;
   color: white;
@@ -75,7 +85,7 @@ h1, h3, h4 {
   padding: 0 20px;
 }
 
-/* --- Mood Selector (now above the pet card) --- */
+/* --- Mood Selector --- */
 .mood-selector {
   width: 100%;
   text-align: center;
@@ -130,7 +140,7 @@ h1, h3, h4 {
   border-radius: 20px;
 }
 
-/* --- Responsive Global Layout --- */
+/* --- Responsive --- */
 @media (max-width: 900px) {
   .main-layout {
     flex-direction: column;

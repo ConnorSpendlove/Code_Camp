@@ -8,16 +8,16 @@
 </head>
 <body>
     
-    <!-- Navbar Component -->
-    <div id="navbar"></div>
+  <!-- Navbar Placeholder -->
+  <div id="navbar"></div>
 
-  <h1>Your Self-Care Pet</h1>
-  <p>Select your mood and complete tasks to make your pet happy!</p>
-  
+  <!-- Page Header -->
+  <header style="text-align: center; margin-top: 20px;">
+    <h1>Your Self-Care Pet</h1>
+    <p>Select your mood and complete tasks to make your pet happy!</p>
+  </header>
 
-  <!-- Main Content Layout -->
-
-  <!-- Mood Dropdown -->
+  <!-- Mood Selector -->
   <div class="mood-selector">
     <label for="mood-select"><strong>Your Mood:</strong></label>
     <select id="mood-select">
@@ -28,18 +28,17 @@
       <option value="happy">Happy</option>
     </select>
   </div>
-  <div class="main-layout">
 
+  <!-- Main Layout -->
+  <div class="main-layout">
     <!-- Pet Section -->
     <div id="pet-container" class="pet-container"></div>
-
-     
 
     <!-- Tasks Section -->
     <div class="tasks">
       <h3>Suggested Tasks</h3>
       <div id="task-list"></div>
-      
+
       <!-- Quote of the Day -->
       <div class="quote-of-the-day-container">
         <h4>Quote of the Day</h4>
@@ -48,14 +47,15 @@
     </div>
   </div>
 
+  <!-- Footer Placeholder -->
   <div id="footer"></div>
 
+  <!-- Scripts -->
   <script src="components.js"></script>
- <script src="scripts/tasks.js"></script>
-<script src="scripts/taskbar.js"></script>
-<script src="scripts/quotes.js"></script>
-<script src="scripts/happiness.js"></script>
-
+  <script src="scripts/tasks.js"></script>
+  <script src="scripts/taskbar.js"></script>
+  <script src="scripts/quotes.js"></script>
+  <script src="scripts/happiness.js"></script>
 
 </body>
 </html>
