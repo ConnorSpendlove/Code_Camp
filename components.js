@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  loadComponent('navbar', '/components/navbar.html', 'navbarLoaded');
-  loadComponent('footer', '/omponents/footer.html', 'footerLoaded');
-  loadComponent('pet-container', '/omponents/pet_card.html', 'petLoaded');
+  loadComponent('navbar', 'components/navbar.html', 'navbarLoaded');
+  loadComponent('footer', 'components/footer.html', 'footerLoaded');
+  loadComponent('pet-container', 'components/pet_card.html', 'petLoaded');
 });
