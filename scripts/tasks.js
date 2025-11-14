@@ -211,7 +211,7 @@ function openTaskModal(task, index) {
     showCongratsMessage();
     closeModal(modal);
   });
-  
+
 // Reset button now generates a new task
 modal.querySelector("#reset-btn").addEventListener("click", () => {
   replaceTask(index);  // replace with a new task
@@ -265,7 +265,7 @@ function replaceTask(index) {
 // Happiness meter
 function increaseHappiness() {
   const fill = document.getElementById("happiness-fill");
-  let current = parseInt(fill.style.width) || 20;
+  let current = parseInt(fill.style.width) || 0;
   current = Math.min(current + 10, 100);
   fill.style.width = current + "%";
 }

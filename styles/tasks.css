@@ -158,7 +158,7 @@
 }
 
 #happiness-fill {
-  width: 20%; /* default fill, updated by JS */
+  width: 0%; /* default fill, updated by JS */
   height: 100%;
   background: #6ecb63;
   border-radius: 12px 0 0 12px;
