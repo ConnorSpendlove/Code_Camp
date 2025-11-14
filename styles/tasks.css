@@ -53,6 +53,23 @@
 }
 
 
+/* Happiness Meter */
+.happiness-meter {
+  margin-top: 20px;
+  width: 100%;
+  height: 25px;
+  background: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#happiness-fill {
+  width: 20%;
+  height: 100%;
+  background: #6ecb63;
+  transition: width 0.3s;
+}
+
 
 /* Responsive for Tasks */
 @media (max-width: 900px) {
