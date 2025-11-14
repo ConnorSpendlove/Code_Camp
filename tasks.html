@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Self-Care Pet</title>
+  <link rel="stylesheet" href="styles/global_styles.css" />
+  <link rel="stylesheet" href="styles/tasks.css" />
+</head>
+<body>
+    
+  <!-- Navbar Placeholder -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <header style="text-align: center; margin-top: 20px;">
+    <h1>Your Self-Care Pet</h1>
+    <p>Select your mood and complete tasks to make your pet happy!</p>
+  </header>
+
+  <!-- Mood Selector -->
+  <div class="mood-selector">
+    <label for="mood-select"><strong>Your Mood:</strong></label>
+    <select id="mood-select">
+      <option value="afraid">Afraid</option>
+      <option value="anxious">Anxious</option>
+      <option value="angry">Angry</option>
+      <option value="sad">Sad</option>
+      <option value="happy">Happy</option>
+    </select>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    <!-- Pet Section -->
+    <div id="pet-container" class="pet-container"></div>
+
+    <!-- Tasks Section -->
+    <div class="tasks">
+      <h3>Suggested Tasks</h3>
+      <div id="task-list"></div>
+
+      <!-- Quote of the Day -->
+      <div class="quote-of-the-day-container">
+        <h4>Quote of the Day</h4>
+        <p id="quote-of-the-day"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Placeholder -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="components.js"></script>
+  <script src="scripts/tasks.js"></script>
+  <script src="scripts/taskbar.js"></script>
+  <script src="scripts/quotes.js"></script>
+  <script src="scripts/happiness.js"></script>
+
+</body>
+</html>
