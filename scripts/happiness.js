@@ -1,10 +1,14 @@
-document.addEventListener("petLoaded", () => {
+function initHappinessBar() {
   const happinessFill = document.getElementById("happiness-fill");
+  if (!happinessFill) {
+    console.warn("Happiness bar not found yet.");
+    return;
+  }
 
   const THIRTY_MINUTES = 30 * 60 * 1000;
 
   let savedHappiness = parseInt(localStorage.getItem("happiness"));
-  let happiness = isNaN(savedHappiness) ? 20 : savedHappiness;
+  let happiness = !isNaN(savedHappiness) ? savedHappiness : 20;
 
   happinessFill.style.width = happiness + "%";
 
@@ -22,6 +26,8 @@ document.addEventListener("petLoaded", () => {
 
   setInterval(decreaseHappiness, THIRTY_MINUTES);
 
-  // expose the function globally if needed
   window.increaseHappiness = increaseHappiness;
-});
+}
+
+// Wait for pet card to load
+document.addEventListener("petLoaded", initHappinessBar);

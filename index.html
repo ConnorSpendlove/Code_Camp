@@ -3,38 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <title>Self-Care Pet</title>
-  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles/global_styles.css" />
+  <link rel="stylesheet" href="styles/tasks.css" />
 </head>
 <body>
+    
+    <!-- Navbar Component -->
+    <div id="navbar"></div>
 
   <h1>Your Self-Care Pet</h1>
   <p>Select your mood and complete tasks to make your pet happy!</p>
+  
 
   <!-- Main Content Layout -->
+
+  <!-- Mood Dropdown -->
+  <div class="mood-selector">
+    <label for="mood-select"><strong>Your Mood:</strong></label>
+    <select id="mood-select">
+      <option value="afraid">Afraid</option>
+      <option value="anxious">Anxious</option>
+      <option value="angry">Angry</option>
+      <option value="sad">Sad</option>
+      <option value="happy">Happy</option>
+    </select>
+  </div>
   <div class="main-layout">
+
     <!-- Pet Section -->
-    <div class="pet-container">
-      <div class="pet-image">
-        <img src="images/fox_idle_animation.gif" alt="Fox Animation" />
-      </div>
+    <div id="pet-container" class="pet-container"></div>
 
-      <!-- Mood Dropdown -->
-      <div class="mood-selector">
-        <label for="mood-select"><strong>Your Mood:</strong></label>
-        <select id="mood-select">
-          <option value="afraid">Afraid</option>
-          <option value="anxious">Anxious</option>
-          <option value="angry">Angry</option>
-          <option value="sad">Sad</option>
-          <option value="happy">Happy</option>
-        </select>
-      </div>
-
-      <h3 style="margin-top: 20px;">Happiness</h3>
-      <div class="happiness-meter">
-        <div id="happiness-fill"></div>
-      </div>
-    </div>
+     
 
     <!-- Tasks Section -->
     <div class="tasks">
@@ -49,9 +48,14 @@
     </div>
   </div>
 
-  <script src = "scripts/tasks.js"></script>
-  <script src = "scripts/taskbar.js"></script>
-  <script src = "scripts/quotes.js"></script>
+  <div id="footer"></div>
+
+  <script src="components.js"></script>
+ <script src="scripts/tasks.js"></script>
+<script src="scripts/taskbar.js"></script>
+<script src="scripts/quotes.js"></script>
+<script src="scripts/happiness.js"></script>
+
 
 </body>
 </html>

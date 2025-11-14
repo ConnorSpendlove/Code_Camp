@@ -1,0 +1,144 @@
+/* --- Global Styles --- */
+body {
+  font-family: Arial, sans-serif;
+  background: #ff9756;
+  margin: 0;
+  padding: 0; /* full-width header/footer need 0 padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1, h3, h4 {
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+/* --- Navbar (full width, modern) --- */
+.navbar {
+  width: 100%;
+  background: #54428e;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s;
+}
+
+.navbar-links a:hover {
+  opacity: 0.75;
+}
+
+/* --- Footer (full width, clean, modern) --- */
+.footer {
+  width: 100%;
+  background: #1e0a74;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 60px;
+  box-sizing: border-box;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
+}
+
+/* --- Main Layout --- */
+.main-layout {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+/* --- Mood Selector (now above the pet card) --- */
+.mood-selector {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.mood-selector label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.mood-selector select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+/* --- Pet Card --- */
+.pet-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 24px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.pet-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  background: #e4e4e4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pet-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* --- Responsive Global Layout --- */
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .pet-container {
+    width: 90%;
+  }
+}
