@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <title>Self-Care Pet</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
+
+  <h1>Your Self-Care Pet</h1>
+  <p>Select your mood and complete tasks to make your pet happy!</p>
+
+  <!-- Mood Dropdown -->
+  <label for="mood-select"><strong>Your Mood:</strong></label>
+  <select id="mood-select">
+    <option value="stressed">Stressed</option>
+    <option value="low">Low Energy</option>
+    <option value="overwhelmed">Overwhelmed</option>
+    <option value="motivated">Motivated</option>
+    <option value="happy">Happy</option>
+  </select>
+
+  <!-- Pet Section -->
+  <div class="pet-container">
+
+    <div class="pet-image">
+      Pet Image
+    </div>
+
+    <div class="tasks">
+      <h3>Suggested Tasks</h3>
+      <div id="task-list"></div>
+    </div>
+
+    <h3 style="margin-top: 20px;">Happiness</h3>
+    <div class="happiness-meter">
+      <div id="happiness-fill"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
