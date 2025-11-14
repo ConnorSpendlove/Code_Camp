@@ -17,45 +17,39 @@
       --radius-lg: 16px;
       --radius-xl: 24px;
     }
-
+  
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
+  
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-      background: radial-gradient(circle at top, #1e293b, #020617);
+      background: radial-gradient(circle at top, #ff9757, #020617);
       color: var(--text);
       min-height: 100vh;
     }
-
+  
     a {
       color: inherit;
       text-decoration: none;
     }
-
+  
     .page {
       max-width: 960px;
       margin: 0 auto;
       padding: 24px 16px 48px;
     }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
-    }
-
+  
+  
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-
+  
     .logo-icon {
       width: 36px;
       height: 36px;
@@ -66,34 +60,34 @@
       justify-content: center;
       font-size: 20px;
     }
-
+  
     .logo-text {
       font-weight: 600;
       font-size: 18px;
     }
-
+  
     nav {
       display: flex;
       gap: 16px;
       font-size: 14px;
       color: var(--text-muted);
     }
-
+  
     nav a {
       padding: 4px 8px;
       border-radius: 999px;
       transition: background 0.15s, color 0.15s;
     }
-
+  
     nav a:hover {
       background: var(--accent-soft);
       color: var(--accent);
     }
-
+  
     .hero {
       background: linear-gradient(
         135deg,
-        rgba(56, 189, 248, 0.12),
+        rgba(232, 32, 95, 0.425), /* jij*/
         rgba(56, 189, 248, 0.02)
       );
       border-radius: var(--radius-xl);
@@ -101,43 +95,43 @@
       padding: 24px 20px;
       margin-bottom: 28px;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
       align-items: center;
     }
-
+  
     .hero-title {
       font-size: clamp(28px, 4vw, 34px);
       font-weight: 700;
       margin-bottom: 8px;
     }
-
+  
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-size: 12px;
       color: var(--accent);
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.8); /*nnn*/
       border-radius: 999px;
       border: 1px solid rgba(56, 189, 248, 0.4);
       padding: 4px 10px;
       margin-bottom: 12px;
     }
-
+  
     .hero-subtitle {
       font-size: 15px;
       color: var(--text-muted);
       margin-bottom: 16px;
       max-width: 380px;
     }
-
+  
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
-
+  
     .hero-tag {
       font-size: 11px;
       padding: 4px 10px;
@@ -146,89 +140,30 @@
       border: 1px solid var(--border);
       color: var(--text-muted);
     }
-
-    .hero-pet-card {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 16px;
-      text-align: center;
-    }
-
-    .pet-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 24px;
-      margin: 0 auto 10px;
-      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-    }
-
-    .pet-name {
-      font-weight: 600;
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .pet-caption {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .pet-status-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .pet-bar {
-      position: relative;
-      width: 100%;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 1);
-      overflow: hidden;
-      border: 1px solid #1e293b;
-      margin-bottom: 4px;
-    }
-
-    .pet-bar-fill {
-      position: absolute;
-      inset: 0;
-      width: 78%;
-      background: linear-gradient(90deg, #22c55e, #38bdf8);
-    }
-
+  
     .section {
-      background: rgba(15, 23, 42, 0.95);
+      background: #ff97575a; /*e*/
       border-radius: var(--radius-xl);
       border: 1px solid var(--border);
       padding: 20px 18px;
       margin-bottom: 20px;
     }
-
+  
     .section h2 {
       font-size: 18px;
       margin-bottom: 6px;
     }
-
+  
     .section p {
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.5;
     }
-
+  
     .section + .section {
       margin-top: 16px;
     }
-
+  
     .pill {
       display: inline-flex;
       align-items: center;
@@ -241,13 +176,13 @@
       color: var(--text-muted);
       margin-bottom: 10px;
     }
-
+  
     .section-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 16px;
     }
-
+  
     .list {
       list-style: none;
       margin-top: 10px;
@@ -256,25 +191,25 @@
       font-size: 13px;
       color: var(--text-muted);
     }
-
+  
     .list li {
       display: flex;
       align-items: flex-start;
       gap: 8px;
     }
-
+  
     .list li span {
       font-size: 16px;
       line-height: 1.2;
     }
-
+  
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 14px;
       margin-top: 10px;
     }
-
+  
     .team-card {
       background: var(--card);
       border-radius: var(--radius-lg);
@@ -282,124 +217,66 @@
       padding: 12px;
       font-size: 13px;
     }
-
+  
     .team-name {
       font-weight: 600;
       margin-bottom: 2px;
     }
-
+  
     .team-role {
       font-size: 11px;
       color: var(--accent);
       margin-bottom: 6px;
     }
-
+  
     .team-note {
       font-size: 12px;
       color: var(--text-muted);
     }
-
-    footer {
-      padding-top: 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border-top: 1px solid rgba(15, 23, 42, 0.8);
-      margin-top: 10px;
-    }
-
-    footer a {
-      text-decoration: underline;
-      text-decoration-color: rgba(148, 163, 184, 0.5);
-    }
-
+  
     @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
+  
       nav {
         width: 100%;
         justify-content: flex-start;
         overflow-x: auto;
       }
-
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
+  
       .section-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-
+  
       .page {
         padding-inline: 14px;
       }
     }
   </style>
+  
 </head>
 <body>
   <div class="page">
-    <header>
-      <div class="logo">
-        <div class="logo-icon" aria-hidden="true">🐾</div>
-        <div class="logo-text">MoodBuddy</div>
-      </div>
-      <nav aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="app.html">App</a>
-        <a href="about.html">About</a>
-      </nav>
-    </header>
-
     <main>
-      <!-- Hero / Intro -->
-      <section class="hero">
-        <div>
-          <div class="hero-badge">
-            <span>💻</span>
-            <span>Built in 24 hours at CodeCamp</span>
-          </div>
-          <h1 class="hero-title">About MoodBuddy</h1>
-          <p class="hero-subtitle">
-            MoodBuddy is a Tamagotchi-style digital pet that cares about one
-            thing: <strong>your well-being</strong>. The happier you feel, the
-            happier your buddy gets.
-          </p>
-          <div class="hero-tags">
-            <div class="hero-tag">Mental well-being</div>
-            <div class="hero-tag">Micro-habits</div>
-            <div class="hero-tag">Tamagotchi vibes</div>
-            <div class="hero-tag">Built for students</div>
-          </div>
-        </div>
-
-        <aside class="hero-pet-card" aria-label="Example pet status card">
-          <div class="pet-avatar" aria-hidden="true">😺</div>
-          <div class="pet-name">Lumo, your MoodBuddy</div>
-          <div class="pet-caption">
-            “When you drink water, I level up too!”
-          </div>
-
-          <div class="pet-status-row">
-            <span>Happiness</span>
-            <span>78%</span>
-          </div>
-          <div class="pet-bar">
-            <div class="pet-bar-fill"></div>
-          </div>
-
-          <div class="pet-status-row">
-            <span>Last task</span>
-            <span>✨ Completed</span>
-          </div>
-        </aside>
-      </section>
-
+        <section class="hero">
+            <div>
+              <div class="hero-badge">
+                <span>💻</span>
+                <span>Built in 24 hours at CodeCamp</span>
+              </div>
+              <h1 class="hero-title">About MoodBuddy</h1>
+              <p class="hero-subtitle">
+                MoodBuddy is a Tamagotchi-style digital pet that cares about one
+                thing: <strong>your well-being</strong>. The happier you feel, the
+                happier your buddy gets.
+              </p>
+              <div class="hero-tags">
+                <div class="hero-tag">Mental well-being</div>
+                <div class="hero-tag">Micro-habits</div>
+                <div class="hero-tag">Tamagotchi vibes</div>
+                <div class="hero-tag">Built for students</div>
+              </div>
+            </div>
+          </section>
+          
       <!-- Mission & Idea -->
       <section class="section">
         <div class="pill">
@@ -511,35 +388,23 @@
 
         <div class="team-grid">
           <article class="team-card">
-            <div class="team-name">[Your Name]</div>
-            <div class="team-role">Frontend & UX</div>
+            <div class="team-name">Mateo Osorio</div>
             <div class="team-note">
-              Built the interface, pet screens, and all the tiny details that
-              make MoodBuddy feel alive.
+              Developer for the project, is here 2 years ago and he is from Peru!
             </div>
           </article>
           <article class="team-card">
-            <div class="team-name">[Teammate 2]</div>
-            <div class="team-role">Logic & Tasks</div>
+            <div class="team-name">Connor Spendlove</div>
             <div class="team-note">
-              Designed the emotion system and all the micro-tasks for each mood.
+              add description.
             </div>
           </article>
           <article class="team-card">
-            <div class="team-name">[Teammate 3]</div>
-            <div class="team-role">Wellness Research</div>
+            <div class="team-name">Adrian Ninanya</div>
             <div class="team-note">
-              Focused on making tasks small, safe, and actually doable in real
-              life.
+                add description.
             </div>
           </article>
-          <article class="team-card">
-            <div class="team-name">[Teammate 4]</div>
-            <div class="team-role">Presentation & Story</div>
-            <div class="team-note">
-              Crafted the story behind MoodBuddy and how it fits into everyday
-              student life.
-            </div>
           </article>
         </div>
       </section>
@@ -559,20 +424,9 @@
         </p>
       </section>
     </main>
-
-    <footer>
-      <span>© <span id="year"></span> MoodBuddy. Built with care at CodeCamp.</span>
-      <span>
-        <a href="mailto:hello@example.com">Contact</a>
-        &nbsp;·&nbsp;
-        <a href="#">Privacy</a>
-      </span>
-    </footer>
   </div>
 
   <script>
-    // Simple current year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
