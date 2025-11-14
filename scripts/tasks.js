@@ -145,14 +145,14 @@ const taskList = document.getElementById("task-list");
 let currentMood = moodSelect.value;
 let displayedTasks;
 
-//Checking if mood is stored in local storage
+// --- Load stored mood ---
 let storedMood = localStorage.getItem("mood");
 if (storedMood && moodTasks.hasOwnProperty(storedMood)) {
   currentMood = storedMood;
   moodSelect.value = storedMood;
 }
 
-//Checking if tasks are stored in local storage
+// --- Load stored tasks ---
 let storedTasks = localStorage.getItem("tasks");
 if (storedTasks) {
   displayedTasks = JSON.parse(storedTasks);
@@ -160,98 +160,128 @@ if (storedTasks) {
   displayedTasks = generateTaskQueue(currentMood, 5);
 }
 
+// --- Initial render ---
 renderTasks();
 
-// Load tasks
-function loadTasks(mood) {
-  currentMood = mood;
-  displayedTasks = generateTaskQueue(mood, 5);
-  renderTasks();
-}
-
-// Render tasks in DOM
-function renderTasks() {
-  taskList.innerHTML = "";
-  displayedTasks.forEach(task => {
-    const container = document.createElement("div");
-    container.className = "task-container";
-    container.innerHTML = `
-      <input type="checkbox" class="task-checkbox" />
-      <span class="task-text">${task}</span>
-      <button class="skip-btn">⟳</button>
-    `;
-    taskList.appendChild(container);
-
-    // Complete task
-    container.querySelector(".task-checkbox").addEventListener("change", function() {
-      if (this.checked) completeTask(task);
-    });
-
-    // Skip task
-    container.querySelector(".skip-btn").addEventListener("click", () => skipTask(task));
-  });
-}
-
-// Complete a task: remove it and add new one if available
-function completeTask(task) {
-  increaseHappiness();
-  replaceTask(task);
-  saveTasksToLocalStorage();
-}
-
-// Skip a task without affecting happiness
-function skipTask(task) {
-  replaceTask(task);
-  saveTasksToLocalStorage();
-}
-
-// Replace a task with a new one from the mood pool
-function replaceTask(oldTask) {
-  const newTask = getNextTask(currentMood, displayedTasks);
-  if (newTask) {
-    displayedTasks = displayedTasks.map(t => t === oldTask ? newTask : t);
-  } else {
-    // Remove if no new tasks
-    displayedTasks = displayedTasks.filter(t => t !== oldTask);
-  }
-  renderTasks();
-}
-
-// Function to shuffle array
-function shuffleArray(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
-
-// Task generator
-function generateTaskQueue(mood, count = 5) {
-  const tasks = [...moodTasks[mood]]; // copy
-  const shuffled = shuffleArray(tasks);
-  return shuffled.slice(0, count);
-}
-
-// Function to get next task from mood pool
-function getNextTask(mood, displayedTasks) {
-  const remaining = moodTasks[mood].filter(task => !displayedTasks.includes(task));
-  if (remaining.length === 0) return null; // no more tasks
-  const nextTask = remaining[Math.floor(Math.random() * remaining.length)];
-  return nextTask;
-}
-
-//Saving tasks to local storage
-function saveTasksToLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(displayedTasks));
-}
-
-function saveMoodToLocalStorage() {
-  localStorage.setItem("mood", currentMood);
-}
-
-// Event: mood change
-moodSelect.addEventListener("change", e => {
+// --- Mood change event ---
+moodSelect.addEventListener("change", (e) => {
   currentMood = e.target.value;
-  displayedTasks = generateTaskQueue(currentMood, 5); // refresh tasks
+  displayedTasks = generateTaskQueue(currentMood, 5);
   renderTasks();
   saveTasksToLocalStorage();
   saveMoodToLocalStorage();
 });
+
+// --- Functions ---
+// Render tasks as clickable cards
+function renderTasks() {
+  taskList.innerHTML = "";
+  displayedTasks.forEach((task, index) => {
+    const card = document.createElement("div");
+    card.className = "task-card";
+    card.innerHTML = `<p>${task}</p>`;
+    taskList.appendChild(card);
+
+    // Click to open modal
+    card.addEventListener("click", () => openTaskModal(task, index));
+  });
+}
+
+// Open modal for a task
+function openTaskModal(task, index) {
+  const modal = document.createElement("div");
+  modal.className = "task-modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h3>Task</h3>
+      <p>${task}</p>
+      <div class="modal-buttons">
+        <button id="complete-btn">✅ Complete</button>
+        <button id="reset-btn">🔄 Reset</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  requestAnimationFrame(() => modal.classList.add("show"));
+
+  // Complete task button
+  modal.querySelector("#complete-btn").addEventListener("click", () => {
+    completeTask(index);
+    showCongratsMessage();
+    closeModal(modal);
+  });
+  
+// Reset button now generates a new task
+modal.querySelector("#reset-btn").addEventListener("click", () => {
+  replaceTask(index);  // replace with a new task
+  closeModal(modal);
+});
+
+  // Close modal on click outside
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal(modal);
+  });
+}
+
+// Close modal helper
+function closeModal(modal) {
+  modal.classList.remove("show");
+  setTimeout(() => modal.remove(), 300);
+}
+
+// Show a brief congrats message
+function showCongratsMessage() {
+  const congrats = document.createElement("div");
+  congrats.className = "congrats-message";
+  congrats.textContent = "🎉 Task Completed!";
+  document.body.appendChild(congrats);
+
+  requestAnimationFrame(() => congrats.classList.add("show"));
+
+  setTimeout(() => {
+    congrats.classList.remove("show");
+    setTimeout(() => congrats.remove(), 300);
+  }, 2000);
+}
+
+// Complete task logic: increase happiness, replace task
+function completeTask(index) {
+  increaseHappiness();
+  replaceTask(index);
+  saveTasksToLocalStorage();
+}
+
+// Replace a task with a new one from mood pool
+function replaceTask(index) {
+  const oldTask = displayedTasks[index];
+  const remaining = moodTasks[currentMood].filter(t => !displayedTasks.includes(t));
+  const newTask = remaining.length ? remaining[Math.floor(Math.random() * remaining.length)] : null;
+  if (newTask) displayedTasks[index] = newTask;
+  else displayedTasks.splice(index, 1); // remove if no more tasks
+  renderTasks();
+}
+
+// Happiness meter
+function increaseHappiness() {
+  const fill = document.getElementById("happiness-fill");
+  let current = parseInt(fill.style.width) || 20;
+  current = Math.min(current + 10, 100);
+  fill.style.width = current + "%";
+}
+
+// Generate random task queue
+function generateTaskQueue(mood, count = 5) {
+  const tasks = [...moodTasks[mood]];
+  const shuffled = tasks.sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+// Save/load to local storage
+function saveTasksToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(displayedTasks));
+}
+function saveMoodToLocalStorage() {
+  localStorage.setItem("mood", currentMood);
+}
 
