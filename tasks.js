@@ -145,6 +145,13 @@ const taskList = document.getElementById("task-list");
 let currentMood = moodSelect.value;
 let displayedTasks;
 
+//Checking if mood is stored in local storage
+let storedMood = localStorage.getItem("mood");
+if (storedMood && moodTasks.hasOwnProperty(storedMood)) {
+  currentMood = storedMood;
+  moodSelect.value = storedMood;
+}
+
 //Checking if tasks are stored in local storage
 let storedTasks = localStorage.getItem("tasks");
 if (storedTasks) {
@@ -235,11 +242,16 @@ function saveTasksToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(displayedTasks));
 }
 
+function saveMoodToLocalStorage() {
+  localStorage.setItem("mood", currentMood);
+}
+
 // Event: mood change
 moodSelect.addEventListener("change", e => {
   currentMood = e.target.value;
   displayedTasks = generateTaskQueue(currentMood, 5); // refresh tasks
   renderTasks();
   saveTasksToLocalStorage();
+  saveMoodToLocalStorage();
 });
 
