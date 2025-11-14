@@ -19,7 +19,7 @@ h1, h3, h4 {
 /* --- Navbar --- */
 #navbar {
   width: 100%;
-  background: #427f8e;
+  background: #ab4704;
   padding: 18px 40px;
   display: flex;
   justify-content: space-between;
@@ -62,13 +62,13 @@ h1, h3, h4 {
 /* --- Footer --- */
 #footer {
   width: 100%;
-  background: #1e0a74;
+  background: #ab4704;
   color: white;
   text-align: center;
   padding: 20px 10px;
-  margin-top: 60px;
   box-sizing: border-box;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
+  margin-top: auto; /* pushes footer to the bottom */
 }
 
 /* --- Main Layout --- */
