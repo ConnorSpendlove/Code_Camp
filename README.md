@@ -1,12 +1,12 @@
-# Self-Care Tomagotchi
-A tiny virtual companion that takes care of you.
+# Mochi Fox
+A tiny virtual fox that takes care of you.
 
 # Live Site
 ------------------
 - https://mochifox.vercel.app/
 
 # Overview
-Self-Care Tomagotchi is a simple, interactive web app that turns self-care into a game.
+Mochi Fox is a simple, interactive web app that turns self-care into a game.
 Instead of you taking care of a pet… the pet takes care of you.
 
 You select your current mood, and the app generates self-care tasks tailored to how you're feeling.
