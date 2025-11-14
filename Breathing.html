@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mochi Fox</title>
+  <link rel="stylesheet" href="styles/global_styles.css" />
+  <link rel="stylesheet" href="styles/breathing.css">
+  <link rel="stylesheet" href="styles/breathing_pixel.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar Component -->
+  <div id="navbar"></div>
+
+  <header style="text-align: center; margin-top: 20px;">
+    <h1>Breathing Coach</h1>
+  </header>
+
+  <!-- Breathing Section -->
+  <section class="pixel-breathing">
+    <h2>PIXEL BREATHING</h2>
+  
+    <label for="breathing-select">Technique:</label>
+    <select id="breathing-select" class="pixel-select">
+      <option value="box">BOX (4-4-4-4)</option>
+      <option value="478">4-7-8</option>
+      <option value="calm">CALM (4-6)</option>
+    </select>
+  
+    <div id="breathing-display" class="pixel-display">
+      PRESS START
+    </div>
+  
+    <!-- Pixel "circle" -->
+    <div id="pixel-breath" class="pixel-box pixel-small"></div>
+  
+    <button id="breathing-start" class="pixel-btn">START</button>
+    <button id="breathing-stop" class="pixel-btn">STOP</button>
+  </section>
+
+  <div class="main-layout"></div>
+
+  <!-- Footer Component -->
+  <div id="footer"></div>
+
+
+  <!-- Main Components Script -->
+  <script src="components.js"></script>
+
+
+  <!-- 🔥 Breathing Script (Now at the BOTTOM — works correctly) -->
+  <script>
+    const display = document.getElementById("breathing-display");
+    const select = document.getElementById("breathing-select");
+    const pixelBox = document.getElementById("pixel-breath");
+    
+    const startBtn = document.getElementById("breathing-start");
+    const stopBtn = document.getElementById("breathing-stop");
+    
+    let interval = null;
+    let step = 0;
+    
+    const techniques = {
+      box: [
+        { label: "INHALE", seconds: 4, size: "pixel-medium" },
+        { label: "HOLD", seconds: 4, size: "pixel-large" },
+        { label: "EXHALE", seconds: 4, size: "pixel-small" },
+        { label: "HOLD", seconds: 4, size: "pixel-small" }
+      ],
+      478: [
+        { label: "INHALE", seconds: 4, size: "pixel-medium" },
+        { label: "HOLD", seconds: 7, size: "pixel-large" },
+        { label: "EXHALE", seconds: 8, size: "pixel-small" }
+      ],
+      calm: [
+        { label: "INHALE", seconds: 4, size: "pixel-medium" },
+        { label: "EXHALE", seconds: 6, size: "pixel-small" }
+      ]
+    };
+    
+    function startBreathing() {
+      stopBreathing();
+      const current = techniques[select.value];
+      step = 0;
+    
+      function runStep() {
+        const part = current[step];
+    
+        display.textContent = `${part.label} (${part.seconds}s)`;
+        pixelBox.className = `pixel-box ${part.size}`;
+    
+        interval = setTimeout(() => {
+          step = (step + 1) % current.length;
+          runStep();
+        }, part.seconds * 1000);
+      }
+    
+      runStep();
+    }
+    
+    function stopBreathing() {
+      clearTimeout(interval);
+      display.textContent = "PRESS START";
+      pixelBox.className = "pixel-box pixel-small";
+    }
+    
+    startBtn.addEventListener("click", startBreathing);
+    stopBtn.addEventListener("click", stopBreathing);
+    </script>
+    
+
+</body>
+</html>
