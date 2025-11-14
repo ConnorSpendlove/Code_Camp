@@ -10,33 +10,37 @@
   <h1>Your Self-Care Pet</h1>
   <p>Select your mood and complete tasks to make your pet happy!</p>
 
-  <!-- Mood Dropdown -->
-  <label for="mood-select"><strong>Your Mood:</strong></label>
-  <select id="mood-select">
-    <option value="afraid">Afraid</option>
-    <option value="anxious">Anxious</option>
-    <option value="angry">Angry</option>
-    <option value="msad">Sad</option>
-    <option value="happy">Happy</option>
-  </select>
+  <!-- Main Content Layout -->
+  <div class="main-layout">
+    <!-- Pet Section -->
+    <div class="pet-container">
+      <div class="pet-image">
+        Pet Image
+      </div>
 
-  <!-- Pet Section -->
-  <div class="pet-container">
+      <!-- Mood Dropdown -->
+      <div class="mood-selector">
+        <label for="mood-select"><strong>Your Mood:</strong></label>
+        <select id="mood-select">
+          <option value="afraid">Afraid</option>
+          <option value="anxious">Anxious</option>
+          <option value="angry">Angry</option>
+          <option value="msad">Sad</option>
+          <option value="happy">Happy</option>
+        </select>
+      </div>
 
-    <div class="pet-image">
-      Pet Image
+      <h3 style="margin-top: 20px;">Happiness</h3>
+      <div class="happiness-meter">
+        <div id="happiness-fill"></div>
+      </div>
     </div>
 
+    <!-- Tasks Section -->
     <div class="tasks">
       <h3>Suggested Tasks</h3>
       <div id="task-list"></div>
     </div>
-
-    <h3 style="margin-top: 20px;">Happiness</h3>
-    <div class="happiness-meter">
-      <div id="happiness-fill"></div>
-    </div>
-
   </div>
 
   <script src = "tasks.js"></script>
