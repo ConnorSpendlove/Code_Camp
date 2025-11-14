@@ -140,6 +140,75 @@
     "Look at a familiar object that comforts you"
   ]
 };
+const moodSelect = document.getElementById("mood-select");
+const taskList = document.getElementById("task-list");
+let currentMood = moodSelect.value;
+let displayedTasks;
+
+//Checking if tasks are stored in local storage
+let storedTasks = localStorage.getItem("tasks");
+if (storedTasks) {
+  displayedTasks = JSON.parse(storedTasks);
+} else {
+  displayedTasks = generateTaskQueue(currentMood, 5);
+}
+
+renderTasks();
+
+// Load tasks
+function loadTasks(mood) {
+  currentMood = mood;
+  displayedTasks = generateTaskQueue(mood, 5);
+  renderTasks();
+}
+
+// Render tasks in DOM
+function renderTasks() {
+  taskList.innerHTML = "";
+  displayedTasks.forEach(task => {
+    const container = document.createElement("div");
+    container.className = "task-container";
+    container.innerHTML = `
+      <input type="checkbox" class="task-checkbox" />
+      <span class="task-text">${task}</span>
+      <button class="skip-btn">⟳</button>
+    `;
+    taskList.appendChild(container);
+
+    // Complete task
+    container.querySelector(".task-checkbox").addEventListener("change", function() {
+      if (this.checked) completeTask(task);
+    });
+
+    // Skip task
+    container.querySelector(".skip-btn").addEventListener("click", () => skipTask(task));
+  });
+}
+
+// Complete a task: remove it and add new one if available
+function completeTask(task) {
+  increaseHappiness();
+  replaceTask(task);
+  saveTasksToLocalStorage();
+}
+
+// Skip a task without affecting happiness
+function skipTask(task) {
+  replaceTask(task);
+  saveTasksToLocalStorage();
+}
+
+// Replace a task with a new one from the mood pool
+function replaceTask(oldTask) {
+  const newTask = getNextTask(currentMood, displayedTasks);
+  if (newTask) {
+    displayedTasks = displayedTasks.map(t => t === oldTask ? newTask : t);
+  } else {
+    // Remove if no new tasks
+    displayedTasks = displayedTasks.filter(t => t !== oldTask);
+  }
+  renderTasks();
+}
 
 // Function to shuffle array
 function shuffleArray(arr) {
@@ -160,3 +229,17 @@ function getNextTask(mood, displayedTasks) {
   const nextTask = remaining[Math.floor(Math.random() * remaining.length)];
   return nextTask;
 }
+
+//Saving tasks to local storage
+function saveTasksToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(displayedTasks));
+}
+
+// Event: mood change
+moodSelect.addEventListener("change", e => {
+  currentMood = e.target.value;
+  displayedTasks = generateTaskQueue(currentMood, 5); // refresh tasks
+  renderTasks();
+  saveTasksToLocalStorage();
+});
+
