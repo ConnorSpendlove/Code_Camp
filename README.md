@@ -3,7 +3,7 @@ A tiny virtual companion that takes care of you.
 
 # Live Site
 ------------------
-- https://connorspendlove.github.io/Code_Camp/
+- https://mochifox.vercel.app/
 
 # Overview
 Self-Care Tomagotchi is a simple, interactive web app that turns self-care into a game.
