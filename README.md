@@ -1,6 +1,10 @@
 # Self-Care Tomagotchi
 A tiny virtual companion that takes care of you.
 
+# Live Site
+------------------
+- https://connorspendlove.github.io/Code_Camp/
+
 # Overview
 Self-Care Tomagotchi is a simple, interactive web app that turns self-care into a game.
 Instead of you taking care of a pet… the pet takes care of you.
@@ -20,11 +24,11 @@ This project was built in 24 hours during a code camp hackathon and demonstrates
 - Digital Companion — Cute character image centered on the page
 - Animated UI — Ready for animations, sprites, or sound effects
 
-Future Enhancements
+# Future Enhancements
 ------------------
 - TBD
 
-#Collaborators
+# Collaborators
 -------------
 Name            | LinkedIn                             | Role
 ----------------|-------------------------------------|----------------
