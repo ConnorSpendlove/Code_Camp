@@ -1,0 +1,60 @@
+/* Breathing Section */
+.breathing-section {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 380px;
+  background: #111827;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  text-align: center;
+  color: #e2e8f0;
+  font-family: system-ui;
+}
+
+.breathing-section h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.breathing-section select {
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.breathing-display {
+  margin: 20px 0;
+  font-size: 26px;
+  font-weight: bold;
+  min-height: 40px;
+}
+
+.breath-circle {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: #38bdf8;
+  opacity: 0.3;
+  transition: transform 1s ease-in-out, opacity 0.3s;
+}
+
+.breathing-section button {
+  margin: 5px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.breathing-section button:hover {
+  background: #0ea5e9;
+}
