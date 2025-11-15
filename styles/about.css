@@ -259,3 +259,21 @@
   font-size: 15px;
   color: #666;
 }
+
+/* Team LinkedIn Icons */
+.team-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.team-card i.fa-linkedin-square {
+  font-size: 28px;       
+  color: #ff9756;        
+  transition: transform 0.2s, color 0.2s;
+}
+
+.team-card i.fa-linkedin-square:hover {
+  color: #c25b1b;        
+  transform: scale(1.2); 
+}

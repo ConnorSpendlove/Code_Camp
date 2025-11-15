@@ -1,0 +1,41 @@
+/* Feature Cards for Index Page */
+.features > div {
+  background: #fff8f0; /* light card background */
+  padding: 25px;
+  border-radius: 16px;
+  border: 2px solid #ff9756;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.features > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.features > div h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ab4704;
+  margin-bottom: 12px;
+}
+
+.features > div p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .features > div {
+    flex: 1 1 100%;
+  }
+}
