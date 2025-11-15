@@ -1,26 +1,35 @@
 const canvas = document.getElementById("runner-canvas");
 const ctx = canvas.getContext("2d");
 
+const startBtn = document.getElementById("start-btn");
+const restartBtn = document.getElementById("restart-btn");
+
 const scoreDisplay = document.getElementById("score");
 const highScoreDisplay = document.getElementById("high-score");
-const restartBtn = document.getElementById("restart-btn");
 
 let score = 0;
 let highScore = localStorage.getItem("foxRunnerHighScore") || 0;
 highScoreDisplay.textContent = highScore;
 
-// Player state
+let gameRunning = false;
+let gameOver = false;
+let lastFrameSwitch = 0;
+
+// NEW: Adjusted ground level for big fox
+const GROUND_Y = 180; // moves fox up so he's not buried
+
+// Fox player
 let fox = {
   x: 70,
-  y: 220,
-  width: 100,
-  height: 100,
+  y: GROUND_Y,
+  width: 150,
+  height: 150,
   vy: 0,
   jumping: false,
   frame: 1,
 };
 
-// Load fox sprites
+// Load sprites
 const foxRun1 = new Image();
 foxRun1.src = "../../images/mochi_run1.png";
 
@@ -30,48 +39,47 @@ foxRun2.src = "../../images/mochi_run2.png";
 const foxJump = new Image();
 foxJump.src = "../../images/mochi_jump.png";
 
+const obstacleImg = new Image();
+obstacleImg.src = "../../images/mochi_food.png";
+
 // Obstacles
 let obstacles = [];
-let gameOver = false;
-let lastFrameSwitch = 0;
-
-// Gravity
 const gravity = 1;
 
-// Spawn obstacle every 1.2–2 seconds
 function spawnObstacle() {
-  const height = Math.random() > 0.5 ? 40 : 60;
+  if (!gameRunning || gameOver) return;
+
   obstacles.push({
     x: canvas.width,
-    y: 260 - height,
-    width: height,
-    height: height,
+    y: GROUND_Y + 60, // ground aligned
+    width: 60,
+    height: 60,
   });
 
-  if (!gameOver) {
-    setTimeout(spawnObstacle, 800 + Math.random() * 800);
-  }
+  setTimeout(spawnObstacle, 1000 + Math.random() * 700);
 }
 
-spawnObstacle();
-
-// Draw fox based on state
-function drawFox() {
+// Draw fox
+function drawFox(timestamp) {
   let img;
 
   if (fox.jumping) {
     img = foxJump;
   } else {
+    if (timestamp - lastFrameSwitch > 150) {
+      fox.frame = fox.frame === 1 ? 2 : 1;
+      lastFrameSwitch = timestamp;
+    }
     img = fox.frame === 1 ? foxRun1 : foxRun2;
   }
 
   ctx.drawImage(img, fox.x, fox.y, fox.width, fox.height);
 }
 
-// Jump mechanic
+// Jump
 function jump() {
-  if (!fox.jumping) {
-    fox.vy = -18;
+  if (!fox.jumping && gameRunning) {
+    fox.vy = -20;
     fox.jumping = true;
   }
 }
@@ -80,9 +88,11 @@ document.addEventListener("keydown", (e) => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-// Main game loop
+canvas.addEventListener("touchstart", () => jump());
+
+// Game loop
 function update(timestamp) {
-  if (gameOver) return;
+  if (!gameRunning || gameOver) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -90,49 +100,84 @@ function update(timestamp) {
   fox.y += fox.vy;
   fox.vy += gravity;
 
-  if (fox.y >= 220) {
-    fox.y = 220;
+  if (fox.y >= GROUND_Y) {
+    fox.y = GROUND_Y;
     fox.jumping = false;
   }
 
-  // Switch running frames every 1.5s
-  if (!fox.jumping && timestamp - lastFrameSwitch > 150) {
-    fox.frame = fox.frame === 1 ? 2 : 1;
-    lastFrameSwitch = timestamp;
-  }
-
-  drawFox();
+  drawFox(timestamp);
 
   // OBSTACLES
-  obstacles.forEach((o) => {
-    o.x -= 7;
-    ctx.fillStyle = "#333";
-    ctx.fillRect(o.x, o.y, o.width, o.height);
+  obstacles.forEach((obs) => {
+    obs.x -= 4; // SLOWER SCROLL SPEED
+    ctx.drawImage(obstacleImg, obs.x, obs.y, obs.width, obs.height);
 
-    // Collision detection
+    // FORGIVING COLLISION BOX
+    const shrink = 30;
+
+    const foxHit = {
+      x: fox.x + shrink,
+      y: fox.y + shrink,
+      width: fox.width - shrink * 2,
+      height: fox.height - shrink * 2,
+    };
+
     if (
-      fox.x < o.x + o.width &&
-      fox.x + fox.width > o.x &&
-      fox.y < o.y + o.height &&
-      fox.y + fox.height > o.y
+      foxHit.x < obs.x + obs.width &&
+      foxHit.x + foxHit.width > obs.x &&
+      foxHit.y < obs.y + obs.height &&
+      foxHit.y + foxHit.height > obs.y
     ) {
-      endGame();
+      return endGame();
     }
   });
 
   obstacles = obstacles.filter((o) => o.x + o.width > 0);
 
-  // SCORE
-  score += 1;
+  score++;
   scoreDisplay.textContent = score;
 
   requestAnimationFrame(update);
 }
 
-requestAnimationFrame(update);
+// START BUTTON
+startBtn.addEventListener("click", () => {
+  score = 0;
+  fox.y = GROUND_Y;
+  fox.vy = 0;
+  fox.jumping = false;
+  obstacles = [];
+  gameOver = false;
 
+  startBtn.classList.add("hidden");
+  restartBtn.classList.add("hidden");
+
+  gameRunning = true;
+  spawnObstacle();
+  requestAnimationFrame(update);
+});
+
+// RESTART BUTTON
+restartBtn.addEventListener("click", () => {
+  score = 0;
+  fox.y = GROUND_Y;
+  fox.vy = 0;
+  fox.jumping = false;
+  obstacles = [];
+  gameOver = false;
+
+  restartBtn.classList.add("hidden");
+
+  gameRunning = true;
+  spawnObstacle();
+  requestAnimationFrame(update);
+});
+
+// GAME OVER
 function endGame() {
   gameOver = true;
+  gameRunning = false;
+
   restartBtn.classList.remove("hidden");
 
   if (score > highScore) {
@@ -141,19 +186,3 @@ function endGame() {
     highScoreDisplay.textContent = highScore;
   }
 }
-
-restartBtn.addEventListener("click", () => {
-  // Reset game
-  score = 0;
-  scoreDisplay.textContent = 0;
-  fox.y = 220;
-  fox.vy = 0;
-  fox.jumping = false;
-
-  obstacles = [];
-  gameOver = false;
-  restartBtn.classList.add("hidden");
-
-  spawnObstacle();
-  requestAnimationFrame(update);
-});

@@ -18,23 +18,27 @@
 
   <!-- Page Header -->
   <header style="text-align: center; margin-top: 20px;">
-    <h1>Header</h1>
-    <p>Header Template</p>
+    <h1>Mochi Run!</h1>
   </header>
 
   <!-- Main Content -->
     <div class="main-layout">
-    <!-- Runner Game -->
-        <div class="runner-container">
-        <canvas id="runner-canvas" width="800" height="300"></canvas>
 
-        <div class="runner-ui">
-            <p>Score: <span id="score">0</span></p>
-            <p>High Score: <span id="high-score">0</span></p>
-        </div>
+    <div class="runner-wrapper">
 
-        <button id="restart-btn" class="hidden">Restart</button>
-        </div>
+    <button id="start-btn">Start Game</button>
+    <button id="restart-btn" class="hidden">Restart</button>
+
+    <div class="score-box">
+        Score: <span id="score">0</span><br>
+        High Score: <span id="high-score">0</span>
+    </div>
+
+    <canvas id="runner-canvas" width="700" height="300"></canvas>
+
+    </div>
+
+        
 
     </div>
 
