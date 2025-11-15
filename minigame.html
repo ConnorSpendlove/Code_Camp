@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MochiFox</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="styles/global_styles.css" />
+  <link rel="stylesheet" href="styles/minigames/runner.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+  <!-- Navbar Component -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <header style="text-align: center; margin-top: 20px;">
+    <h1>Mochi Run!</h1>
+  </header>
+
+  <!-- Main Content -->
+    <div class="main-layout">
+
+    <div class="runner-wrapper">
+
+    <button id="start-btn">Start Game</button>
+    <button id="restart-btn" class="hidden">Restart</button>
+
+    <div class="score-box">
+        Score: <span id="score">0</span><br>
+        High Score: <span id="high-score">0</span>
+    </div>
+
+    <canvas id="runner-canvas" width="700" height="300"></canvas>
+
+    </div>
+
+        
+
+    </div>
+
+  <!-- Footer Component -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="components.js"></script>
+  <script src="scripts/minigames/runner.js"></script>
+
+</body>
+</html>
