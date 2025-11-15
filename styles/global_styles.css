@@ -20,7 +20,7 @@ h1, h3, h4 {
 #navbar {
   width: 100%;
   background: #ab4704;
-  padding: 18px 40px;
+  padding: 26px 50px;   /* ← increased height + side spacing */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,6 +32,7 @@ h1, h3, h4 {
   z-index: 1000;
 }
 
+
 .navbar-logo {
   font-family: "Press Start 2P", system-ui;
   font-size: 22px;
@@ -42,7 +43,7 @@ h1, h3, h4 {
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 36px;
   margin: 0;
   padding: 0;
 }
@@ -50,6 +51,7 @@ h1, h3, h4 {
 .navbar-links a {
   color: white;
   text-decoration: none;
+  font-size: 20px;   /* ← was ~14–16px */
   font-weight: 600;
   letter-spacing: 0.4px;
   transition: opacity 0.2s, transform 0.2s;
@@ -154,3 +156,28 @@ h1, h3, h4 {
     width: 90%;
   }
 }
+
+/* Logo + Title wrapper */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;   /* spacing between logo and text */
+}
+
+/* Logo image */
+.navbar-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.navbar-logo-text {
+  font-family: "Press Start 2P", system-ui;
+  font-size: 32px;   /* ← was 18px */
+  font-weight: 700;
+  color: white;
+}
+
+
+ /*lil bro*/
+ 
