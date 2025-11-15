@@ -44,7 +44,7 @@ obstacleImg.src = "../../images/mochi_food.png";
 
 // Obstacles
 let obstacles = [];
-const gravity = 1;
+const gravity = 0.5;
 
 function spawnObstacle() {
   if (!gameRunning || gameOver) return;
@@ -79,7 +79,7 @@ function drawFox(timestamp) {
 // Jump
 function jump() {
   if (!fox.jumping && gameRunning) {
-    fox.vy = -20;
+    fox.vy = -14;
     fox.jumping = true;
   }
 }
@@ -109,7 +109,7 @@ function update(timestamp) {
 
   // OBSTACLES
   obstacles.forEach((obs) => {
-    obs.x -= 4; // SLOWER SCROLL SPEED
+    obs.x -= 6.5; // SLOWER SCROLL SPEED
     ctx.drawImage(obstacleImg, obs.x, obs.y, obs.width, obs.height);
 
     // FORGIVING COLLISION BOX
