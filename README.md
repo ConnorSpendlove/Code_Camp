@@ -3,7 +3,7 @@ A tiny virtual fox that takes care of you.
 
 # Live Site
 ------------------
-- https://mochifox.vercel.app/
+- https://mochithefox.vercel.app/
 
 # Overview
 Mochi Fox is a simple, interactive web app that turns self-care into a game.
