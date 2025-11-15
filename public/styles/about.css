@@ -277,3 +277,36 @@
   color: #c25b1b;        
   transform: scale(1.2); 
 }
+
+/* --- Team Section Responsive Fix --- */
+@media (max-width: 768px) {
+  .team-grid {
+    flex-wrap: wrap;           /* allow cards to wrap */
+    justify-content: center;   /* center them on smaller screens */
+    gap: 20px;                 /* reduce gap for mobile */
+  }
+
+  .team-card {
+    width: 90%;               /* fill most of the mobile width */
+    max-width: 300px;         /* optional max-width to keep cards from being too wide */
+    padding: 15px;            /* slightly smaller padding */
+  }
+
+  .team-photo {
+    width: 100px;             /* smaller photo for mobile */
+    height: 100px;
+  }
+
+  .team-card h3 {
+    font-size: 18px;
+  }
+
+  .team-card p {
+    font-size: 14px;
+  }
+
+  .team-card i.fa-linkedin-square {
+    font-size: 24px;
+  }
+}
+
