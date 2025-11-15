@@ -66,7 +66,8 @@
   
 
       try {
-        const res = await fetch("http://localhost:3000/chat", { //This grabs the answer from the Gemini Server
+        const res = await fetch("https://mochithefox.vercel.app/chat", { // If running locally use "http://localhost:3000/chat"
+
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: text })
