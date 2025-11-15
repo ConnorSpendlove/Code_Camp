@@ -54,15 +54,16 @@
   <!-- Main Layout -->
   <div class="main-layout three-column">
 
-    <!-- LEFT: Feeling Section -->
-    <section class="feeling-section">
-        <h2>How Are You Feeling Today?</h2>
-        <p class="feeling-sub">Write one sentence describing how you feel.</p>
+    <!-- LEFT: TASKS -->
+    <div class="tasks">
+        <h3>Suggested Tasks</h3>
+        <div id="task-list"></div>
 
-        <textarea id="feeling-input" maxlength="200" placeholder="I'm feeling..."></textarea>
-        <button id="feeling-submit">Submit</button>
-        <p id="feeling-response" class="feeling-response hidden"></p>
-    </section>
+        <div class="quote-of-the-day-container">
+            <h4>Quote of the Day</h4>
+            <p id="quote-of-the-day"></p>
+        </div>
+    </div>
 
     <!-- CENTER: PET -->
     <div class="pet-container">
@@ -74,16 +75,15 @@
         </div>
     </div>
 
-    <!-- RIGHT: TASKS -->
-    <div class="tasks">
-        <h3>Suggested Tasks</h3>
-        <div id="task-list"></div>
+    <!-- RIGHT: Feeling Section -->
+    <section class="feeling-section">
+        <h2>How Are You Feeling Today?</h2>
+        <p class="feeling-sub">Write one sentence describing how you feel.</p>
 
-        <div class="quote-of-the-day-container">
-            <h4>Quote of the Day</h4>
-            <p id="quote-of-the-day"></p>
-        </div>
-    </div>
+        <textarea id="feeling-input" maxlength="200" placeholder="I'm feeling..."></textarea>
+        <button id="feeling-submit">Submit</button>
+        <p id="feeling-response" class="feeling-response hidden"></p>
+    </section>
 
 </div>
 
