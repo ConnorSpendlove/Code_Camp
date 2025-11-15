@@ -1,4 +1,6 @@
-/* --- Tasks Container --- */
+/* ===============================
+   TASKS PANEL (RIGHT SIDE)
+=================================*/
 .tasks {
   background: white;
   padding: 20px;
@@ -10,7 +12,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* --- Individual Task Cards --- */
+/* Individual Task Cards */
 .task-card {
   background: #f9f9f9;
   border-radius: 12px;
@@ -32,193 +34,98 @@
   margin: 0;
   font-size: 14px;
   color: #333;
-  line-height: 1.4;
 }
 
-/* --- Modal Overlay --- */
-.modal-overlay {
+
+/* ===============================
+   MODAL
+=================================*/
+.task-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
-  display: none; /* hidden by default */
+  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.modal-overlay.show {
-  display: flex;
+.task-modal.show {
   opacity: 1;
+  pointer-events: auto;
 }
 
-/* --- Modal Content --- */
-.modal {
+.modal-content {
   background: white;
   border-radius: 16px;
   padding: 25px 30px;
   width: 300px;
   max-width: 90%;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   text-align: center;
   transform: scale(0.9);
   transition: transform 0.3s ease;
 }
 
-.modal-overlay.show .modal {
+.task-modal.show .modal-content {
   transform: scale(1);
 }
 
-/* --- Modal Buttons --- */
-.modal button {
+.modal-content h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.modal-content p {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-buttons button {
   padding: 10px 20px;
-  margin: 10px 5px 0 5px;
   border: none;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 14px;
 }
 
-.complete-btn {
+#complete-btn {
   background: #6ecb63;
   color: white;
 }
-
-.complete-btn:hover {
+#complete-btn:hover {
   background: #54a952;
 }
 
-.reset-btn {
+#reset-btn {
   background: #f44336;
   color: white;
 }
-
-.reset-btn:hover {
+#reset-btn:hover {
   background: #d32f2f;
 }
 
-/* --- Congrats Message --- */
-.congrats-message {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffeb3b;
-  color: #333;
-  padding: 15px 25px;
-  border-radius: 12px;
-  font-weight: bold;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 3000;
-}
 
-.congrats-message.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* --- Quote Section */
-.quote-of-the-day-container {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-}
-
-.quote-of-the-day-container h4 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  color: #555;
-}
-
-#quote-of-the-day {
-  font-size: 14px;
-  color: #666;
-  font-style: italic;
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* --- Happiness Meter --- */
-.happiness-meter {
-  margin-top: 20px;
-  width: 100%;
-  height: 25px;
-  background: #eee;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-}
-
-#happiness-fill {
-  width: 0%; /* default fill, updated by JS */
-  height: 100%;
-  background: #6ecb63;
-  border-radius: 12px 0 0 12px;
-  transition: width 0.3s ease, background 0.3s ease;
-}
-
-/* Task Modal */
-.task-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 10000;
-}
-
-.task-modal.show {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.modal-content {
-  background: white;
-  padding: 25px 30px;
-  border-radius: 20px;
-  width: 300px;
-  max-width: 90%;
-  text-align: center;
-  transform: translateY(-30px);
-  transition: transform 0.3s ease;
-}
-
-.task-modal.show .modal-content {
-  transform: translateY(0);
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.modal-buttons button {
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.modal-buttons button:hover {
-  transform: scale(1.05);
-}
-
-/* Congrats message */
+/* ===============================
+   CONGRATS MESSAGE
+=================================*/
 .congrats-message {
   position: fixed;
   top: 10%;
@@ -240,11 +147,173 @@
 }
 
 
+/* ===============================
+   QUOTE OF THE DAY
+=================================*/
+.quote-of-the-day-container {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
 
-/* --- Responsive Tasks Layout --- */
+.quote-of-the-day-container h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+#quote-of-the-day {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* ===============================
+   HAPPINESS METER
+=================================*/
+.happiness-meter {
+  margin-top: 20px;
+  width: 100%;
+  height: 25px;
+  background: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#happiness-fill {
+  width: 0%;
+  height: 100%;
+  background: #6ecb63;
+  border-radius: 12px 0 0 12px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+
+/* ===============================
+   FEELING SECTION (LEFT SIDE)
+=================================*/
+
+.feeling-section {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  width: 300px;
+  text-align: center;
+  align-self: flex-start;
+}
+
+.feeling-section h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #ab4704;
+}
+
+.feeling-sub {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+#feeling-input {
+  width: 100%;
+  height: 80px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #ff9756;
+  background: #fff8f0;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#feeling-submit {
+  margin-top: 15px;
+  padding: 10px 22px;
+  background: #ab4704;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#feeling-submit:hover {
+  background: #8e3a02;
+}
+
+.feeling-response {
+  margin-top: 20px;
+  padding: 12px 18px;
+  background: #fff4e8;
+  border-left: 4px solid #ff9756;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* ===============================
+   RESPONSIVE
+=================================*/
 @media (max-width: 900px) {
-  .tasks {
+
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tasks,
+  .feeling-section {
     width: 90%;
-    margin-top: 20px;
+    max-width: 450px;
+  }
+
+  .feeling-section {
+    margin-bottom: 20px;
   }
 }
+
+/* 3-COLUMN FIX */
+.main-layout.three-column {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  gap: 140px;
+  align-items: flex-start;
+  margin: 40px auto;
+}
+
+/* Ensure each panel stays aligned */
+.feeling-section,
+.pet-container,
+.tasks {
+  margin: 0; /* remove extra margins pushing things down */
+}
+
+/* MOBILE fallback */
+@media (max-width: 900px) {
+  .main-layout.three-column {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feeling-section,
+  .pet-container,
+  .tasks {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+

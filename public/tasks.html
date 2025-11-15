@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <title>MochiTheFox</title>
+
+  <!-- Pixel Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles/global_styles.css" />
   <link rel="stylesheet" href="styles/tasks.css" />
+
+  <!-- Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
+
 <body>
     
   <!-- Navbar Placeholder -->
@@ -19,13 +26,21 @@
   <!-- Page Header -->
   <header style="text-align: center; margin-top: 20px;">
     <h1>Personal Wellness Tasks</h1>
-    <p>Select your mood and complete tasks to make you, and Mochi happy!</p>
+    <p>Select your mood and complete tasks to make you, and Mochi, happy!</p>
   </header>
 
   <!-- Mood Selector -->
   <div class="mood-selector">
-    <label for="mood-select"><strong>Your Mood:</strong></label>
-    <select id="mood-select">
+    <div class="mood-label"><strong>Your Mood:</strong></div>
+    <div class="mood-buttons">
+      <button class="mood-btn" data-mood="afraid" title="Afraid">😰</button>
+      <button class="mood-btn" data-mood="anxious" title="Anxious">😟</button>
+      <button class="mood-btn" data-mood="angry" title="Angry">😠</button>
+      <button class="mood-btn" data-mood="sad" title="Sad">😢</button>
+      <button class="mood-btn" data-mood="happy" title="Happy">😊</button>
+    </div>
+    <!-- Hidden select for compatibility -->
+    <select id="mood-select" style="display: none;">
       <option value="afraid">Afraid</option>
       <option value="anxious">Anxious</option>
       <option value="angry">Angry</option>
@@ -35,30 +50,64 @@
   </div>
 
   <!-- Main Layout -->
-  <div class="main-layout">
+  <div class="main-layout three-column">
 
-    <!-- Pet Section -->
+    <!-- LEFT: Feeling Section -->
+    <section class="feeling-section">
+        <h2>How Are You Feeling Today?</h2>
+        <p class="feeling-sub">Write one sentence describing how you feel.</p>
+
+        <textarea id="feeling-input" maxlength="200" placeholder="I'm feeling..."></textarea>
+        <button id="feeling-submit">Submit</button>
+        <p id="feeling-response" class="feeling-response hidden"></p>
+    </section>
+
+    <!-- CENTER: PET -->
     <div class="pet-container">
         <div id="pet-container"></div>
         <br>
         <h3>Happiness</h3>
-       <div class="happiness-meter">
-           <div id="happiness-fill"></div>
-       </div>
+        <div class="happiness-meter">
+            <div id="happiness-fill"></div>
+        </div>
     </div>
-    
-    <!-- Tasks Section -->
-    <div class="tasks">
-      <h3>Suggested Tasks</h3>
-      <div id="task-list"></div>
 
-      <!-- Quote of the Day -->
-      <div class="quote-of-the-day-container">
-        <h4>Quote of the Day</h4>
-        <p id="quote-of-the-day"></p>
-      </div>
+    <!-- RIGHT: TASKS -->
+    <div class="tasks">
+        <h3>Suggested Tasks</h3>
+        <div id="task-list"></div>
+
+        <div class="quote-of-the-day-container">
+            <h4>Quote of the Day</h4>
+            <p id="quote-of-the-day"></p>
+        </div>
     </div>
-  </div>
+
+</div>
+
+
+
+  <!-- JS For Feeling Section -->
+  <script>
+    const feelingInput = document.getElementById("feeling-input");
+    const feelingSubmit = document.getElementById("feeling-submit");
+    const feelingResponse = document.getElementById("feeling-response");
+
+    feelingSubmit.addEventListener("click", () => {
+      const text = feelingInput.value.trim();
+
+      if (text.length === 0) {
+        feelingResponse.textContent = "Please write at least a few words 😊";
+      } else {
+        feelingResponse.textContent = `Thank you for sharing. Mochi is here for you ❤️`;
+      }
+
+      feelingResponse.classList.remove("hidden");
+
+      // Clear text after submitting (not saved)
+      feelingInput.value = "";
+    });
+  </script>
 
   <!-- Footer Placeholder -->
   <div id="footer"></div>
