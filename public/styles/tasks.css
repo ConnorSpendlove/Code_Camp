@@ -1,4 +1,71 @@
 /* ===============================
+   MOOD SELECTOR (TOP CENTER)
+=================================*/
+
+.mood-selector {
+    text-align: center;
+    margin: 30px 0;
+    /* Use pixel font for the selector text itself */
+    font-family: 'Press Start 2P', cursive;
+}
+
+.mood-label strong {
+    font-size: 14px;
+    color: #ab4704; /* Dark orange label, consistent with global theme */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.mood-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.mood-btn {
+    /* Base Button Reset & Pixel Look */
+    border: 3px solid #ab4704; /* Dark orange border */
+    background-color: #f0f0f0; /* Light background for the button face */
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #7e3602; /* 3D effect/shadow (Darker orange) */
+    transition: transform 0.1s, box-shadow 0.1s;
+    line-height: 0; /* Important to contain image tightly */
+}
+
+.mood-btn img {
+    /* Sizing the Pixel Art Image */
+    width: 32px; /* Adjust size of your pixel art emojis */
+    height: 32px; /* 32 is my Favorite number ~Adrian */
+    display: block;
+}
+
+/* --- Interactive States --- */
+
+/* Hover effect */
+.mood-btn:hover {
+    box-shadow: 0 6px 0 #7e3602;
+    transform: translateY(-1px);
+}
+
+/* Active/Pressed effect */
+.mood-btn:active,
+.mood-btn.selected {
+    /* Simulates pressing the button down */
+    box-shadow: 0 0 0 #7e3602;
+    transform: translateY(5px); 
+    background-color: #ff9756; /* Highlight selected button (lighter orange) */
+    border-color: #ab4704; /* Keep border strong */
+}
+
+/* Style for the currently selected mood */
+.mood-btn[data-mood].selected {
+    background-color: #ff9756; 
+    border-color: #ab4704;
+}
+/* ===============================
    TASKS PANEL (RIGHT SIDE)
 =================================*/
 .tasks {
