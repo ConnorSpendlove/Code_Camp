@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>MochiTheFox</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="styles/global_styles.css" />
   <link rel="stylesheet" href="styles/breathing.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
@@ -20,53 +19,57 @@
   <!-- Navbar Component -->
   <div id="navbar"></div>
 
-  <header style="text-align: center; margin-top: 20px;">
+  <!-- Header -->
+  <header style="text-align: center; margin: 20px 0;">
     <h1>Mochi the Breathing Coach</h1>
   </header>
 
+  <!-- Breathing Section -->
   <section class="breathing-section">
     <h2>Breathing Exercises</h2>
-  
+
+    <!-- Technique Selection -->
     <select id="breathing-select">
       <option value="box">Box: Best for focusing</option>
       <option value="478">4-7-8: Best for getting Sleepy Zzz</option>
-      <option value="calm">4-6: Best for Reducing Stress :)</option> <!--the ')' is not a mistake -->
+      <option value="calm">4-6: Best for Reducing Stress :)</option>
     </select>
-  
+
+    <!-- Timer / Step Display -->
     <div id="breathing-display" class="breathing-display">PRESS START</div>
-  
+
+    <!-- Animated Breathing Image -->
     <div class="breathing-stage">
-      <img id="breath-image" src="android-chrome-512x512.png" class="breath-image breath-small">
+      <img id="breath-image" src="android-chrome-512x512.png" class="breath-image breath-small" alt="Mochi breathing animation">
     </div>
-  
-    <button id="breathing-start">Start</button>
-    <button id="breathing-stop">Stop</button>
+
+    <!-- Control Buttons -->
+    <div class="breathing-buttons">
+      <button id="breathing-start">Start</button>
+      <button id="breathing-stop">Stop</button>
+    </div>
   </section>
-  
 
   <div class="main-layout"></div>
 
   <!-- Footer Component -->
   <div id="footer"></div>
 
-
-  <!-- Main Components Script -->
+  <!-- Scripts -->
   <script src="components.js"></script>
 
-
-  <!-- 🔥 Breathing Script (Now at the BOTTOM — works correctly) -->
+  <!-- Breathing Script -->
   <script>
     const display = document.getElementById("breathing-display");
     const select = document.getElementById("breathing-select");
     const breathImage = document.getElementById("breath-image");
-    
     const startBtn = document.getElementById("breathing-start");
     const stopBtn = document.getElementById("breathing-stop");
-    
+
     let interval = null;
     let countdownInterval = null;
     let step = 0;
-    
+
     const techniques = {
       box: [
         { label: "INHALE", seconds: 4, size: "breath-medium" },
@@ -84,57 +87,44 @@
         { label: "EXHALE", seconds: 6, size: "breath-small" }
       ]
     };
-    
+
     function startBreathing() {
       stopBreathing();
-      
       const current = techniques[select.value];
       step = 0;
-    
+
       function runStep() {
         const part = current[step];
         let timeLeft = part.seconds;
-    
-        // Update image size class
         breathImage.className = `breath-image ${part.size}`;
-    
-        // Set initial display text
         display.textContent = `${part.label} ${timeLeft}`;
-    
-        // Countdown
+
         countdownInterval = setInterval(() => {
           timeLeft--;
           display.textContent = `${part.label} ${timeLeft}`;
-          
-          if (timeLeft <= 0) {
-            clearInterval(countdownInterval);
-          }
+          if (timeLeft <= 0) clearInterval(countdownInterval);
         }, 1000);
-    
-        // Move to next cycle after this step finishes
+
         interval = setTimeout(() => {
           clearInterval(countdownInterval);
           step = (step + 1) % current.length;
           runStep();
         }, part.seconds * 1000);
       }
-    
+
       runStep();
     }
-    
+
     function stopBreathing() {
       clearTimeout(interval);
       clearInterval(countdownInterval);
       display.textContent = "PRESS START";
       breathImage.className = "breath-image breath-small";
     }
-    
+
     startBtn.addEventListener("click", startBreathing);
     stopBtn.addEventListener("click", stopBreathing);
-    </script>
-    
-    
-    
+  </script>
 
 </body>
 </html>
