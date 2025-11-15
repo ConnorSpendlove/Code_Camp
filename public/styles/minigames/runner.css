@@ -1,3 +1,7 @@
+/* ===========================================
+   RUNNER GAME STYLES - MOBILE FRIENDLY
+   =========================================== */
+
 .runner-container {
   width: 100%;
   display: flex;
@@ -13,26 +17,8 @@
   font-size: 14px;
 }
 
+#start-btn,
 #restart-btn {
-  margin-top: 15px;
-  padding: 10px 16px;
-  font-family: "Press Start 2P", monospace;
-  background: #ff9c66;
-  border: 3px solid #333;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-#restart-btn:hover {
-  background: #ff7b33;
-}
-
-.hidden {
-    visibility: hidden;  /* keeps space reserved */
-}
-
-#start-btn, #restart-btn {
   padding: 12px 22px;
   font-family: 'Press Start 2P', cursive;
   border: none;
@@ -41,18 +27,34 @@
   color: white;
   cursor: pointer;
   margin-bottom: 15px;
+  transition: 0.2s ease;
+}
+
+#restart-btn {
+  background: #ff9c66;
+  border: 3px solid #333;
+}
+
+#restart-btn:hover,
+#start-btn:hover {
+  background: #ff7b33;
+}
+
+.hidden {
+  visibility: hidden;  /* keeps space reserved */
 }
 
 .runner-wrapper {
-  position: relative;        /* allows absolute positioning inside */
-  width: 700px;              /* match the canvas width */
+  position: relative;
+  width: 700px; /* default desktop width */
+  max-width: 95%; /* ensures it shrinks on smaller screens */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Score should never move */
+/* Score display */
 .score-box {
   position: absolute;
   top: -10%;
@@ -61,15 +63,66 @@
   z-index: 50;
   font-family: "Press Start 2P", monospace;
   text-align: center;
+  white-space: nowrap; /* prevent wrapping on mobile */
 }
 
-/* Canvas stays in place */
+/* Runner canvas */
 #runner-canvas {
   background: #dfe7f5;
   border: 4px solid #333;
   border-radius: 10px;
   image-rendering: pixelated;
   display: block;
+  width: 100%;
+  height: auto; /* maintain aspect ratio */
 }
 
+/* ========================
+   Mobile Adjustments
+   ======================== */
+@media (max-width: 768px) {
+  .runner-wrapper {
+    width: 100%; /* full width on tablet/mobile */
+  }
 
+  #start-btn,
+  #restart-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+    width: 90%; /* full-ish width on mobile */
+  }
+
+  .runner-ui {
+    font-size: 12px;
+  }
+
+  .score-box {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .runner-wrapper {
+    width: 100%;
+  }
+
+  #start-btn,
+  #restart-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+    width: 100%;
+  }
+
+  .runner-ui {
+    font-size: 11px;
+  }
+
+  .score-box {
+    font-size: 10px;
+    top: -15%; /* adjust for smaller canvas */
+  }
+
+  #runner-canvas {
+    width: 100%;
+  }
+}
