@@ -186,3 +186,76 @@
     font-size: 15px;
   }
 }
+
+/* --- Team Section (MATCHES OTHER SECTIONS) --- */
+.team-section {
+  background: white;
+  padding: 35px 30px;
+  border-radius: 24px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+
+  /* MATCH EXACT WIDTH of other white sections */
+  max-width: 1000px;
+  width: 100%;
+
+  margin: 30px auto; /* same spacing as others */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ab4704;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ff9756;
+}
+
+/* Horizontal team layout */
+.team-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  flex-wrap: nowrap; /* stay in one row */
+}
+
+/* Team Cards */
+.team-card {
+  background: #fff8f0;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #ff9756;
+  width: 260px; /* consistent size */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+}
+
+/* Team Photos */
+.team-photo {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ff9756;
+  margin-bottom: 15px;
+}
+
+.team-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ab4704;
+  margin-bottom: 6px;
+}
+
+.team-card p {
+  font-size: 15px;
+  color: #666;
+}
