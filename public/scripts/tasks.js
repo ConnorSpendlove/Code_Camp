@@ -140,148 +140,199 @@
     "Look at a familiar object that comforts you"
   ]
 };
-const moodSelect = document.getElementById("mood-select");
-const taskList = document.getElementById("task-list");
-let currentMood = moodSelect.value;
-let displayedTasks;
+// Wait for DOM to be ready
+document.addEventListener("DOMContentLoaded", () => {
+  const moodSelect = document.getElementById("mood-select");
+  const taskList = document.getElementById("task-list");
+  const moodButtons = document.querySelectorAll(".mood-btn");
+  
+  // Ensure elements exist before proceeding
+  if (!moodSelect || !taskList) {
+    console.error("Required elements not found");
+    return;
+  }
+  
+  let currentMood = moodSelect.value;
+  let displayedTasks;
 
-// --- Load stored mood ---
-let storedMood = localStorage.getItem("mood");
-if (storedMood && moodTasks.hasOwnProperty(storedMood)) {
-  currentMood = storedMood;
-  moodSelect.value = storedMood;
-}
+  // --- Load stored mood ---
+  let storedMood = localStorage.getItem("mood");
+  if (storedMood && moodTasks.hasOwnProperty(storedMood)) {
+    currentMood = storedMood;
+    moodSelect.value = storedMood;
+  }
 
-// --- Load stored tasks ---
-let storedTasks = localStorage.getItem("tasks");
-if (storedTasks) {
-  displayedTasks = JSON.parse(storedTasks);
-} else {
-  displayedTasks = generateTaskQueue(currentMood, 5);
-}
+  // --- Set active button based on current mood ---
+  function setActiveButton(mood) {
+    moodButtons.forEach(btn => {
+      if (btn.dataset.mood === mood) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  }
 
-// --- Initial render ---
-renderTasks();
+  // --- Initialize active button ---
+  setActiveButton(currentMood);
 
-// --- Mood change event ---
-moodSelect.addEventListener("change", (e) => {
-  currentMood = e.target.value;
-  displayedTasks = generateTaskQueue(currentMood, 5);
+  // --- Load stored tasks ---
+  let storedTasks = localStorage.getItem("tasks");
+  if (storedTasks) {
+    displayedTasks = JSON.parse(storedTasks);
+  } else {
+    displayedTasks = generateTaskQueue(currentMood, 5);
+  }
+
+  // --- Initial render ---
   renderTasks();
-  saveTasksToLocalStorage();
-  saveMoodToLocalStorage();
-});
 
-// --- Functions ---
-// Render tasks as clickable cards
-function renderTasks() {
-  taskList.innerHTML = "";
-  displayedTasks.forEach((task, index) => {
-    const card = document.createElement("div");
-    card.className = "task-card";
-    card.innerHTML = `<p>${task}</p>`;
-    taskList.appendChild(card);
-
-    // Click to open modal
-    card.addEventListener("click", () => openTaskModal(task, index));
+  // --- Mood button click handlers ---
+  moodButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selectedMood = btn.dataset.mood;
+      currentMood = selectedMood;
+      moodSelect.value = selectedMood;
+      setActiveButton(selectedMood);
+      displayedTasks = generateTaskQueue(currentMood, 5);
+      renderTasks();
+      saveTasksToLocalStorage();
+      saveMoodToLocalStorage();
+    });
   });
-}
 
-// Open modal for a task
-function openTaskModal(task, index) {
-  const modal = document.createElement("div");
-  modal.className = "task-modal";
-  modal.innerHTML = `
-    <div class="modal-content">
-      <h3>Task</h3>
-      <p>${task}</p>
-      <div class="modal-buttons">
-        <button id="complete-btn">✅ Complete</button>
-        <button id="reset-btn">🔄 Reset</button>
+  // --- Mood change event (for select, if needed) ---
+  moodSelect.addEventListener("change", (e) => {
+    currentMood = e.target.value;
+    setActiveButton(currentMood);
+    displayedTasks = generateTaskQueue(currentMood, 5);
+    renderTasks();
+    saveTasksToLocalStorage();
+    saveMoodToLocalStorage();
+  });
+
+  // --- Functions ---
+  // Render tasks as clickable cards
+  function renderTasks() {
+    // Clear any existing tasks first
+    taskList.innerHTML = "";
+    displayedTasks.forEach((task, index) => {
+      const card = document.createElement("div");
+      card.className = "task-card";
+      card.innerHTML = `<p>${task}</p>`;
+      taskList.appendChild(card);
+
+      // Click to open modal
+      card.addEventListener("click", () => openTaskModal(task, index));
+    });
+  }
+
+  // Open modal for a task
+  function openTaskModal(task, index) {
+    // Close any existing modals first
+    const existingModal = document.querySelector(".task-modal");
+    if (existingModal) {
+      existingModal.remove();
+    }
+    
+    const modal = document.createElement("div");
+    modal.className = "task-modal";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h3>Task</h3>
+        <p>${task}</p>
+        <div class="modal-buttons">
+          <button id="complete-btn">✅ Complete</button>
+          <button id="reset-btn">🔄 Reset</button>
+        </div>
       </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
+    `;
+    document.body.appendChild(modal);
 
-  requestAnimationFrame(() => modal.classList.add("show"));
+    requestAnimationFrame(() => modal.classList.add("show"));
 
-  // Complete task button
-  modal.querySelector("#complete-btn").addEventListener("click", () => {
-    completeTask(index);
-    showCongratsMessage();
-    closeModal(modal);
-  });
+    // Complete task button
+    modal.querySelector("#complete-btn").addEventListener("click", () => {
+      completeTask(index);
+      showCongratsMessage();
+      closeModal(modal);
+    });
 
-// Reset button now generates a new task
-modal.querySelector("#reset-btn").addEventListener("click", () => {
-  replaceTask(index);  // replace with a new task
-  closeModal(modal);
+    // Reset button now generates a new task
+    modal.querySelector("#reset-btn").addEventListener("click", () => {
+      replaceTask(index);  // replace with a new task
+      closeModal(modal);
+    });
+
+    // Close modal on click outside
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal(modal);
+    });
+  }
+
+  // Close modal helper
+  function closeModal(modal) {
+    modal.classList.remove("show");
+    setTimeout(() => modal.remove(), 300);
+  }
+
+  // Show a brief congrats message
+  function showCongratsMessage() {
+    const congrats = document.createElement("div");
+    congrats.className = "congrats-message";
+    congrats.textContent = "🎉 Task Completed!";
+    document.body.appendChild(congrats);
+
+    requestAnimationFrame(() => congrats.classList.add("show"));
+
+    setTimeout(() => {
+      congrats.classList.remove("show");
+      setTimeout(() => congrats.remove(), 300);
+    }, 2000);
+  }
+
+  // Complete task logic: increase happiness, replace task
+  function completeTask(index) {
+    increaseHappiness();
+    replaceTask(index);
+    saveTasksToLocalStorage();
+  }
+
+  // Replace a task with a new one from mood pool
+  function replaceTask(index) {
+    const remaining = moodTasks[currentMood].filter(t => !displayedTasks.includes(t));
+    const newTask = remaining.length ? remaining[Math.floor(Math.random() * remaining.length)] : null;
+    if (newTask) displayedTasks[index] = newTask;
+    else displayedTasks.splice(index, 1); // remove if no more tasks
+    renderTasks();
+  }
+
+  // Happiness meter
+  function increaseHappiness() {
+    const fill = document.getElementById("happiness-fill");
+    if (fill) {
+      let current = parseInt(fill.style.width) || 0;
+      current = Math.min(current + 10, 100);
+      fill.style.width = current + "%";
+    }
+    // Also call the global function if it exists (from taskbar.js)
+    if (window.increaseHappiness) {
+      window.increaseHappiness();
+    }
+  }
+
+  // Generate random task queue
+  function generateTaskQueue(mood, count = 5) {
+    const tasks = [...moodTasks[mood]];
+    const shuffled = tasks.sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  }
+
+  // Save/load to local storage
+  function saveTasksToLocalStorage() {
+    localStorage.setItem("tasks", JSON.stringify(displayedTasks));
+  }
+  function saveMoodToLocalStorage() {
+    localStorage.setItem("mood", currentMood);
+  }
 });
-
-  // Close modal on click outside
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal(modal);
-  });
-}
-
-// Close modal helper
-function closeModal(modal) {
-  modal.classList.remove("show");
-  setTimeout(() => modal.remove(), 300);
-}
-
-// Show a brief congrats message
-function showCongratsMessage() {
-  const congrats = document.createElement("div");
-  congrats.className = "congrats-message";
-  congrats.textContent = "🎉 Task Completed!";
-  document.body.appendChild(congrats);
-
-  requestAnimationFrame(() => congrats.classList.add("show"));
-
-  setTimeout(() => {
-    congrats.classList.remove("show");
-    setTimeout(() => congrats.remove(), 300);
-  }, 2000);
-}
-
-// Complete task logic: increase happiness, replace task
-function completeTask(index) {
-  increaseHappiness();
-  replaceTask(index);
-  saveTasksToLocalStorage();
-}
-
-// Replace a task with a new one from mood pool
-function replaceTask(index) {
-  const oldTask = displayedTasks[index];
-  const remaining = moodTasks[currentMood].filter(t => !displayedTasks.includes(t));
-  const newTask = remaining.length ? remaining[Math.floor(Math.random() * remaining.length)] : null;
-  if (newTask) displayedTasks[index] = newTask;
-  else displayedTasks.splice(index, 1); // remove if no more tasks
-  renderTasks();
-}
-
-// Happiness meter
-function increaseHappiness() {
-  const fill = document.getElementById("happiness-fill");
-  let current = parseInt(fill.style.width) || 0;
-  current = Math.min(current + 10, 100);
-  fill.style.width = current + "%";
-}
-
-// Generate random task queue
-function generateTaskQueue(mood, count = 5) {
-  const tasks = [...moodTasks[mood]];
-  const shuffled = tasks.sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-}
-
-// Save/load to local storage
-function saveTasksToLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(displayedTasks));
-}
-function saveMoodToLocalStorage() {
-  localStorage.setItem("mood", currentMood);
-}
-
