@@ -1,98 +1,152 @@
 /* ===========================================
-   MERGED BREATHING STYLES (FINAL VERSION)
+   BREATHING PAGE - MOBILE FRIENDLY VERSION
    =========================================== */
 
-   .breathing-section {
-    margin: 40px auto;
-    padding: 40px 20px;
-    max-width: 700px;       /* Wide like your pixel style */
-    width: 100%;
-    background: #944e11;    /* Your pixel background */
-    border: 4px solid #333; /* Thick pixel border */
-    border-radius: 4px;
-    text-align: center;
-    color: #e5e5e5;
-    font-family: system-ui;
-  
-    min-height: 520px;      /* Enough space for breathing animation */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 20px;
+.breathing-section {
+  margin: 30px auto;
+  padding: 30px 20px;
+  max-width: 600px;
+  width: 100%;
+  background: #944e11;      /* MochiFox warm brown */
+  border: 4px solid #ff9756; /* brighter border to match site */
+  border-radius: 8px;
+  text-align: center;
+  color: #fcf7ff;            /* light text for readability */
+  font-family: 'Press Start 2P', system-ui;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.breathing-section h2 {
+  font-size: 20px;
+  color: #fcf7ff;
+  margin-bottom: 10px;
+}
+
+/* Dropdown */
+.breathing-section select {
+  width: 100%;
+  padding: 10px;
+  background: #ff9756;
+  border: 3px solid #ab4704;
+  color: #0f172a;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Timer / step display */
+.breathing-display {
+  font-size: 24px;
+  font-weight: bold;
+  min-height: 40px;
+  color: #ff9756;
+}
+
+/* Breathing stage */
+.breathing-stage {
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+/* Breathing image */
+.breath-image {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: transform 1s ease-in-out, opacity 0.3s;
+}
+
+/* Scaling for JS controlled classes */
+.breath-small  { transform: scale(1); }
+.breath-medium { transform: scale(1.4); }
+.breath-large  { transform: scale(1.8); }
+
+/* Buttons */
+.breathing-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.breathing-section button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  color: #0f172a;
+  background: #e9950e;
+  transition: background 0.3s ease;
+  flex: 1 1 120px; /* flexible buttons on small screens */
+}
+
+.breathing-section button:hover {
+  background: #f8ab30;
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .breathing-section {
+    padding: 20px 15px;
+    max-width: 95%;
+    min-height: 380px;
   }
-  
-  /* Title */
-  .breathing-section h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  /* Dropdown */
-  .breathing-section select {
-    width: 100%;
-    padding: 10px;
-    background: #fbbf24;     /* Yellow dropdown (your style) */
-    border: 3px solid #444;
-    color: #0f172a;
-    border-radius: 4px;
-    font-family: inherit;
-  }
-  
-  /* Timer / inhale/hold/exhale text */
-  .breathing-display {
-    margin-top: 10px;
-    min-height: 40px;
-    font-size: 26px;
-    font-weight: bold;
-    color: #fbbf24;        /* Your timer color */
-  }
-  
-  /* ===========================================
-     BREATHING STAGE — SPACE FOR IMAGE TO GROW
-     =========================================== */
+
   .breathing-stage {
-    height: 260px;          /* Important spacing */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
-    margin-bottom: 10px;
+    height: 180px;
   }
-  
-  /* ===========================================
-     BREATHING IMAGE (REPLACES PIXEL BOX)
-     =========================================== */
+
   .breath-image {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    display: block;
-    transition: transform 1s ease-in-out, opacity 0.3s;
+    width: 100px;
+    height: 100px;
   }
-  
-  /* Scaling controlled by JS */
+
   .breath-small  { transform: scale(1); }
-  .breath-medium { transform: scale(1.4); }
-  .breath-large  { transform: scale(1.8); }
-  
-  /* ===========================================
-     BUTTONS (your original style)
-     =========================================== */
+  .breath-medium { transform: scale(1.3); }
+  .breath-large  { transform: scale(1.6); }
+
+  .breathing-display {
+    font-size: 20px;
+  }
+
+  .breathing-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .breathing-section button {
-    margin: 5px;
-    padding: 12px 18px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    background: #e4331b;
-    color: #0f172a;
-    font-weight: 600;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 13px;
   }
-  
-  .breathing-section button:hover {
-    background: #e9950e;
+}
+
+@media (max-width: 480px) {
+  .breathing-section {
+    padding: 15px 10px;
+    min-height: 320px;
   }
-  
+
+  .breathing-stage {
+    height: 160px;
+  }
+
+  .breath-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .breathing-display {
+    font-size: 18px;
+  }
+}
