@@ -1,7 +1,17 @@
+.features {
+  max-width: 1200px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap:20px;
+
+}
+
 /* Feature Cards for Index Page */
 .features > div {
   background: #fff8f0; /* light card background */
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
   border: 2px solid #ff9756;
   text-align: center;
@@ -32,10 +42,23 @@
 @media (max-width: 768px) {
   .features {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    align-items: center; /* center the cards horizontally */
   }
 
   .features > div {
-    flex: 1 1 100%;
+    flex: 0 0 auto;       /* do not stretch */
+    width: auto;          /* shrink to fit content */
+    padding: 15px;        /* slightly smaller padding */
+    min-width: 0;         /* prevent min-width issues */
+  }
+
+  .features > div h3 {
+    font-size: 18px;
+  }
+
+  .features > div p {
+    font-size: 14px;
+    line-height: 1.5;
   }
 }
