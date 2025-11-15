@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <title>MochiTheFox</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-  <link rel="stylesheet" href="styles/global_styles.css" />
+    <link rel="stylesheet" href="styles/global_styles.css" />
+    <link rel="stylesheet" href="styles/chatbot.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -17,17 +18,27 @@
 
   <!-- Page Header -->
   <header style="text-align: center; margin-top: 20px;">
-    <h1>Header</h1>
-    <p>Header Template</p>
+    <h1>Chat with Mochi</h1>
   </header>
 
   <!-- Main Content -->
-    <div class="main-layout">
-        <!-- AI Chatbot Container -->
-         <div id="chat"> <div id="messages"></div> <input id="input" placeholder="Say something..." style="width:80%"> <button id="send">Send</button> </div>
-        <!-- Pet Container -->
-        <div id="pet-container" class="pet-container"></div>
+   <div class="main-layout">
+    <div id="chat" class="game-window">
+        <div id="messages" class="message-board"></div> 
+
+        <div class="input-area">
+            <input id="input" placeholder="Ask Mochi..." class="text-input">
+            <button id="send" class="arcade-button">SEND</button>
+        </div>
+
+        <div class="disclaimer-message"> 
+            ⚠️ Mochi is not a certified therapist, so don't fully follow his advice.
+        </div>
     </div>
+   
+    <div id="pet-container" class="pet-container chatbot-pet">
+        </div>
+</div>
 
   <!-- Footer Component -->
   <div id="footer"></div>
@@ -64,19 +75,19 @@
       addMessage("You: " + text, "user");
       input.value = "";
   
-
+      // Use "http://localhost:3000/chat" for local testing
       try {
-      const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text })
+        const res = await fetch("/api/chat", { //Use /api/chat for live deployment
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
 
         });
        /* console.log("Response status:", res.status);
         console.log("Response headers:", res);
         console.log("What it looks like: ", res.json());*/
         const data = await res.json();
-        addMessage("Pet: " + data.reply, "bot");
+        addMessage("Mochi: " + data.reply, "bot");
 
         /* Instead of checking for audio, just speak the reply!
         if (data.reply) {
