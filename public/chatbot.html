@@ -66,11 +66,11 @@
   
 
       try {
-        const res = await fetch("https://mochithefox.vercel.app/chatbot/chat", { // If running locally use "http://localhost:3000/chat"
+      const res = await fetch("/api/chatbot/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text })
 
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
         });
        /* console.log("Response status:", res.status);
         console.log("Response headers:", res);
