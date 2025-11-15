@@ -1,5 +1,6 @@
 # Mochi Fox
 A tiny virtual fox that takes care of you.
+![HomePage](public/images/readme_img/IntroMochi.png)
 
 # Live Site
 ------------------
@@ -11,6 +12,7 @@ Instead of you taking care of a pet… the pet takes care of you.
 
 You select your current mood, and the app generates self-care tasks tailored to how you're feeling.
 Completing tasks increases your pet’s happiness meter, encouraging healthy habits through a fun, supportive interaction.
+![TasksPage](public/images/readme_img/TasksPage.png)
 
 This project was built in 24 hours during a code camp hackathon and demonstrates:
 - TBD
