@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MochiTheFox</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="styles/global_styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+  <!-- Navbar Component -->
+  <div id="navbar"></div>
+
+  <!-- Page Header -->
+  <header style="text-align: center; margin-top: 20px;">
+    <h1>Header</h1>
+    <p>Header Template</p>
+  </header>
+
+  <!-- Main Content -->
+    <div class="main-layout">
+        <!-- AI Chatbot Container -->
+         <div id="chat"> <div id="messages"></div> <input id="input" placeholder="Say something..." style="width:80%"> <button id="send">Send</button> </div>
+        <!-- Pet Container -->
+        <div id="pet-container" class="pet-container"></div>
+    </div>
+
+  <!-- Footer Component -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="components.js"></script>
+  <script> 
+       const messagesDiv = document.getElementById("messages");
+    const input = document.getElementById("input");
+
+    function addMessage(text, cls) {
+      const div = document.createElement("div");
+      div.className = "msg " + cls;
+      div.textContent = text;
+      messagesDiv.appendChild(div);
+    }
+
+
+//     * @param {string} text - The text you want the browser to speak.
+     /*
+    function speak(text) {
+      // Create a new speech "utterance"
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+  
+      
+      // Tell the browser to speak it!
+      window.speechSynthesis.speak(utterance);
+    } */
+    document.getElementById("send").addEventListener("click", async () => {
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMessage("You: " + text, "user");
+      input.value = "";
+  
+
+      try {
+        const res = await fetch("http://localhost:3000/chat", { //This grabs the answer from the Gemini Server
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+       /* console.log("Response status:", res.status);
+        console.log("Response headers:", res);
+        console.log("What it looks like: ", res.json());*/
+        const data = await res.json();
+        addMessage("Pet: " + data.reply, "bot");
+
+        /* Instead of checking for audio, just speak the reply!
+        if (data.reply) {
+          speak(data.reply);
+        }*/
+
+
+      } catch (err) {
+        console.error("Error fetching chat:", err);
+        addMessage("Pet: (I'm having trouble connecting...)", "bot");
+      }
+    });
+  </script>
+</body>
+</html>

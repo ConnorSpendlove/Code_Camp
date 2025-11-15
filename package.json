@@ -1,0 +1,28 @@
+{
+  "name": "code_camp",
+  "version": "1.0.0",
+  "description": "A tiny virtual fox that takes care of you.",
+  "main": "components.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConnorSpendlove/Code_Camp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ConnorSpendlove/Code_Camp/issues"
+  },
+  "homepage": "https://github.com/ConnorSpendlove/Code_Camp#readme",
+  "dependencies": {
+    "@google/genai": "^1.29.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
