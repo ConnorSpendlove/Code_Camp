@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="styles/global_styles.css" />
   <link rel="stylesheet" href="styles/breathing.css">
-  <link rel="stylesheet" href="styles/breathing_pixel.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -23,29 +22,25 @@
     <h1>Breathing Coach</h1>
   </header>
 
-  <!-- Breathing Section -->
-  <section class="pixel-breathing">
-    <h2>PIXEL BREATHING</h2>
+  <section class="breathing-section">
+    <h2>Breathing Exercises</h2>
   
-    <label for="breathing-select">Technique:</label>
-    <select id="breathing-select" class="pixel-select">
-      <option value="box">BOX :Best for Resetting your focus</option>
-      <option value="478">4-7-8: Best for Getting sleepy</option>
-      <option value="calm">CALM (4-6) : Best for Lowering Stress</option>
+    <select id="breathing-select">
+      <option value="box">Box: Best for focusing</option>
+      <option value="478">4-7-8: Best for getting Sleepy Zzz</option>
+      <option value="calm">4-6: Best for Reducing Stress :)</option> <!--the ')' is not a mistake -->
     </select>
   
-    <div id="breathing-display" class="pixel-display">
-      PRESS START
+    <div id="breathing-display" class="breathing-display">PRESS START</div>
+  
+    <div class="breathing-stage">
+      <img id="breath-image" src="android-chrome-512x512.png" class="breath-image breath-small">
     </div>
   
-    <!-- Pixel "circle" -->
-    <div class="pixel-breathing-stage">
-        <div id="pixel-breath" class="pixel-box pixel-small"></div>
-      </div>
-  
-    <button id="breathing-start" class="pixel-btn">START</button>
-    <button id="breathing-stop" class="pixel-btn">STOP</button>
+    <button id="breathing-start">Start</button>
+    <button id="breathing-stop">Stop</button>
   </section>
+  
 
   <div class="main-layout"></div>
 
@@ -61,7 +56,7 @@
   <script>
     const display = document.getElementById("breathing-display");
     const select = document.getElementById("breathing-select");
-    const pixelBox = document.getElementById("pixel-breath");
+    const breathImage = document.getElementById("breath-image");
     
     const startBtn = document.getElementById("breathing-start");
     const stopBtn = document.getElementById("breathing-stop");
@@ -72,19 +67,19 @@
     
     const techniques = {
       box: [
-        { label: "INHALE", seconds: 4, size: "pixel-medium" },
-        { label: "HOLD", seconds: 4, size: "pixel-large" },
-        { label: "EXHALE", seconds: 4, size: "pixel-small" },
-        { label: "HOLD", seconds: 4, size: "pixel-small" }
+        { label: "INHALE", seconds: 4, size: "breath-medium" },
+        { label: "HOLD", seconds: 4, size: "breath-large" },
+        { label: "EXHALE", seconds: 4, size: "breath-small" },
+        { label: "HOLD", seconds: 4, size: "breath-small" }
       ],
       478: [
-        { label: "INHALE", seconds: 4, size: "pixel-medium" },
-        { label: "HOLD", seconds: 7, size: "pixel-large" },
-        { label: "EXHALE", seconds: 8, size: "pixel-small" }
+        { label: "INHALE", seconds: 4, size: "breath-medium" },
+        { label: "HOLD", seconds: 7, size: "breath-large" },
+        { label: "EXHALE", seconds: 8, size: "breath-small" }
       ],
       calm: [
-        { label: "INHALE", seconds: 4, size: "pixel-medium" },
-        { label: "EXHALE", seconds: 6, size: "pixel-small" }
+        { label: "INHALE", seconds: 4, size: "breath-medium" },
+        { label: "EXHALE", seconds: 6, size: "breath-small" }
       ]
     };
     
@@ -98,25 +93,25 @@
         const part = current[step];
         let timeLeft = part.seconds;
     
-        // Update pixel box size
-        pixelBox.className = `pixel-box ${part.size}`;
+        // Update image size class
+        breathImage.className = `breath-image ${part.size}`;
     
-        // Start countdown immediately
+        // Set initial display text
         display.textContent = `${part.label} ${timeLeft}`;
-        
-        // COUNTDOWN TIMER
+    
+        // Countdown
         countdownInterval = setInterval(() => {
           timeLeft--;
           display.textContent = `${part.label} ${timeLeft}`;
-    
+          
           if (timeLeft <= 0) {
             clearInterval(countdownInterval);
           }
         }, 1000);
     
-        // Move to next step after time passes
+        // Move to next cycle after this step finishes
         interval = setTimeout(() => {
-          clearInterval(countdownInterval); 
+          clearInterval(countdownInterval);
           step = (step + 1) % current.length;
           runStep();
         }, part.seconds * 1000);
@@ -129,12 +124,13 @@
       clearTimeout(interval);
       clearInterval(countdownInterval);
       display.textContent = "PRESS START";
-      pixelBox.className = "pixel-box pixel-small";
+      breathImage.className = "breath-image breath-small";
     }
     
     startBtn.addEventListener("click", startBreathing);
     stopBtn.addEventListener("click", stopBreathing);
     </script>
+    
     
     
 
